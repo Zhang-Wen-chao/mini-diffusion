@@ -54,7 +54,10 @@ class TextImageDataset(Dataset):
 
     def __getitem__(self, i):
         item = self.ds[i]
-        image = Image.open(item["image"].filename).convert("RGB")
+        if isinstance(item["image"], Image.Image):
+            image = item["image"].convert("RGB")
+        else:
+            image = Image.open(item["image"].filename).convert("RGB")
         if item.get("text"):
             caption = item["text"]
         else:
@@ -108,9 +111,8 @@ def main():
 
     if args.gradient_checkpointing:
         unet.enable_gradient_checkpointing()
-    if args.mixed_precision == "fp16":
-        vae.to(dtype=torch.float16)
-        text_encoder.to(dtype=torch.float16)
+    # VAE/TE 冻结在 fp32（unet 的 fp16 由 accelerate autocast 托管，
+    # 避免 VAE 的 GroupNorm 在 fp16 下反向报 dtype 错误）
 
     # ── 2. 数据 ──────────────────────────────────────────────────
     train_ds = TextImageDataset(args.dataset, args.resolution, tokenizer)
@@ -134,10 +136,8 @@ def main():
     while global_step < args.max_train_steps:
         for batch in train_dl:
             with accelerator.accumulate(unet):
-                # VAE 编码到 latent 空间（冻结）
-                latents = vae.encode(batch["pixel_values"].to(
-                    dtype=vae.dtype if args.mixed_precision == "fp16" else None
-                )).latent_dist.sample()
+                # VAE 编码到 latent 空间（冻结，fp32）
+                latents = vae.encode(batch["pixel_values"]).latent_dist.sample()
                 latents = latents * VAE_SCALE
 
                 # 文本条件嵌入（冻结）
