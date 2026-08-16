@@ -19,6 +19,7 @@ AIGC 分布式训练学习路线：从 mini-megatron（LLM 并行）到 Diffusio
 | 2 | 手写 mini flow matching（纯 PyTorch） | ✅ flow_matching/ + docs/phase2/ |
 | 3 | DiT + 分布式（TP/DP，等价性验证通过） | ✅ docs/phase3/experiment-notes.md |
 | 4 | MoE + DeepSpeed（Wan2.2 路线，负结果分析） | ✅ docs/phase4/ |
+| 5 | 蒸馏一步生成（1 步 FID 857→304，DMD 增强 +12%） | ✅ docs/phase5/ |
 | 4 | MoE + DeepSpeed（Wan2.2 架构） | ⏳ |
 | 5 | 蒸馏（DMD / MeanFlow） | ⏳ |
 
