@@ -1,18 +1,18 @@
 # 执行计划（PLAN）
 
-> 更新：2026-08-15。总目标：从 mini-megatron（LLM 并行）到 AIGC（Diffusion）训练，
+> 更新：2026-08-16。总目标：从 mini-megatron（LLM 并行）到 AIGC（Diffusion）训练，
 > 对标 Shopee AIGC 分布式训练优化工程师 JD。原则：**先理论后实现，实现用纯 PyTorch，
 > 对比基线验证**。每个 Phase 有明确验收，复用 4×L20 基准方法论。
 
-## 里程碑
+## 里程碑（全部达成 ✅）
 
 ```
-M0 (当前)  Phase 0 理论完成 → M1: 能手推 DDPM/Flow Matching 目标，讲清三者关系
-M1        Phase 1 diffusers 跑通 → M2: 理解完整 pipeline (VAE→TE→UNet→scheduler)
-M2        Phase 2 mini flow matching 可训练出图 → M3: 生成质量肉眼可见
-M3        Phase 3 分布式+DiT → M4: loss 曲线与单卡一致, MFU 对比
-M4        Phase 4 MoE+DeepSpeed (Wan2.2) → M5: 多卡跑通+讲清实现
-M5        Phase 5 蒸馏 → M6: 少步生成对比报告
+M0  Phase 0 理论完成 ✅   → docs/theory/01-04（DDPM/FM/RF+蒸馏/并行复用）
+M1  Phase 1 diffusers 跑通 ✅ → docs/phase1（pipeline 拆解 + 踩坑）
+M2  Phase 2 mini flow matching ✅ → flow 50步 FID 54.4 vs ddpm 94.1（少步优势实证）
+M3  Phase 3 分布式+DiT ✅ → TP=2 loss 差异 ~1e-4（等价性验证）
+M4  Phase 4 MoE+DeepSpeed ✅ → Wan2.2 读码 + 负结果分析 + ZeRO-2/3 跑通
+M5  Phase 5 蒸馏 ✅ → 1 步 FID 857→304（DMD +12%）
 ```
 
 ## Phase 0 — 理论（当前）
