@@ -34,7 +34,7 @@ image ──Resize/CenterCrop/Normalize──> [3,256,256] ──VAE──> [4,3
 - **UNet 是唯一可训练组件**：微调只动 UNet，VAE/TE 冻结 → 显存大减。
 - **采样**：DDIM（确定性 ODE 离散化，30 步），CFG=7.5（文本条件放大）。
 
-## 踩坑记录（都是面试能讲的工程经验）
+## 踩坑记录
 
 1. **transformers 5.9 与 diffusers 0.33 不兼容**：`FLAX_WEIGHTS_NAME` 被 transformers 5.x 移除。
    解法：升级 diffusers 到 0.39（兼容 5.x），**不动容器原有 transformers**。
