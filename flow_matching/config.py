@@ -8,11 +8,18 @@ from dataclasses import dataclass, field
 @dataclass
 class ModelConfig:
     in_channels: int = 3          # CIFAR-10 RGB
-    base_channels: int = 128      # 第一层通道数
+    base_channels: int = 128      # UNet 第一层通道数
     channel_mult: tuple = (1, 2, 2, 2)   # 32→16→8→4
     num_res_blocks: int = 2
     attn_resolutions: tuple = (8, 4)     # 低分辨率加 attention
     dropout: float = 0.0
+    # DiT 字段（与 UNet 字段共存，按架构取用）
+    hidden_size: int = 384        # DiT hidden（DiT-S 配置）
+    num_heads: int = 6
+    depth: int = 6
+    mlp_ratio: float = 4.0
+    patch_size: int = 4
+    image_size: int = 32
 
 
 @dataclass
