@@ -2,7 +2,7 @@
 
 > 阶段：需求记录 + 技术路线规划（2026-08-15）
 > 目标：从已完成的 LLM 分布式训练（mini-megatron）走向 AIGC（Diffusion）训练，
-> 对标「Shopee 【MPI&D】AIGC 分布式训练优化工程师」岗位要求。
+> 建立 AIGC 分布式训练方向的完整知识体系。
 
 ---
 
@@ -17,24 +17,24 @@
 
 ---
 
-## 2. 目标岗位 JD 拆解（Shopee AIGC 分布式训练优化工程师）
+## 2. 学习目标拆解
 
-### 2.1 工作职责 → 学习任务映射
+### 2.1 方向 → 学习任务映射
 
-| 职责 | 对应学习任务 |
+| 方向 | 对应学习任务 |
 |---|---|
-| 建设 AIGC 分布式训练工具链 | 掌握 accelerate / DeepSpeed / Megatron-Core 工具链，理解其取舍 |
+| AIGC 分布式训练工具链 | 掌握 accelerate / DeepSpeed / Megatron-Core 工具链，理解其取舍 |
 | 计算/通信/存储优化 | FlashAttention、算子融合、ZeRO、序列并行（长序列=视频/图像特征）、激活重计算 |
 | 训练稳定性 | timestep 采样策略、loss 尺度、SNR 分析、MoE 训练稳定性（Wan2.2 高/低噪声专家） |
-| 跟进前沿技术并落地 | Flow Matching → Rectified Flow → 蒸馏（DMD/DMD2/MeanFlow）路线跟踪 |
+| 前沿技术跟进 | Flow Matching → Rectified Flow → 蒸馏（DMD/DMD2/MeanFlow）路线跟踪 |
 
-### 2.2 任职要求 → 已有/差距
+### 2.2 已有技能 → 待补技能
 
-| 要求 | 已有（mini-megatron 已覆盖） | 差距 | 补课路径 |
+| 能力 | 已有（mini-megatron 已覆盖） | 差距 | 补课路径 |
 |---|---|---|---|
 | 数据/流水线/张量并行 | ✅ 手写实现 TP/PP/DP | 专家并行（EP） | Phase 4：Wan2.2 MoE |
 | PyTorch / DeepSpeed / Megatron | ✅ PyTorch + Megatron-Core 基线对比 | DeepSpeed（ZeRO/Ulysses） | Phase 4 |
-| CUDA / NCCL / cuDNN | ⚠️ 有 NCCL 多卡实操（TP/PP 通信） | CUDA 算子开发 | 可后置（对照 JD"有经验更好"） |
+| CUDA / NCCL / cuDNN | ⚠️ 有 NCCL 多卡实操（TP/PP 通信） | CUDA 算子开发 | 可后置 |
 | AIGC 预训练、Diffusion（SD/Flux） | ❌ | 全链路 | 本文 Phase 0-3 |
 | Transformer 理解 | ✅ 手写 GPT | DiT / MMDiT 变体 | Phase 3 |
 | 训练优化/稳定性分析 | ✅ MFU 诊断框架（L20 基准） | diffusion 特有稳定性问题 | Phase 2-3 |
@@ -57,10 +57,10 @@ GAN (对抗) → VAE (似然下界) → DDPM (去噪扩散, 2020)
 
 - **主线 A — 扩散基础**：DDPM 的噪声预测目标 → DDIM 加速采样 → SDE 统一打分模型视角。
   理解"训练一个网络预测噪声/速度"，以及时间 t 在训练中如何被采样。
-- **主线 B — Flow 路线（现代主流，与目标岗位直接相关）**：
+- **主线 B — Flow 路线（现代主流）**：
   Flow Matching 把扩散目标改写为"预测速度场"，Rectified Flow 让轨迹直线化（更少步数采样）。
-  **SD3（MMDiT）、Flux、Wan2.x 全部走这条路**。这是面试和工程的主战场。
-- **主线 C — 一步/少步生成（蒸馏，JD"前沿技术"项）**：
+  **SD3（MMDiT）、Flux、Wan2.x 全部走这条路**。这是工程实现的主战场。
+- **主线 C — 一步/少步生成（蒸馏）**：
   DMD（分布匹配蒸馏）、DMD2（+GAN loss）、MeanFlow 系列（联合学习瞬时/平均速度场，
   实现 1 步生成）。Wan2.2-Fast、SDXL-Turbo 等产品化加速都来自这条线。
 
@@ -112,7 +112,7 @@ U-Net (LDM/SD1.x) → DiT (纯 Transformer) → MMDiT (SD3, 双流合并)
 | Attention | FlashAttention / 2 / 3 | 2205.14135 / 2307.08691 / 2407.08608 | ⚠️ 原理理解，用现成实现 |
 | 框架 | PyTorch FSDP | 2304.11277 | ❌ Wan2.2 官方用它 |
 
-### 4.3 加分（面试谈资）
+### 4.3 扩展阅读
 
 - LCM (Latent Consistency Models, 2310.04378)：LCM-LoRA 微调范式。
 - SDXL (2307.01952)、Flux (官网/博客)：工业界主流模型演进。
@@ -179,7 +179,7 @@ PCIe 无 NVLink。做"正确性/方法论"验证，不做规模。
 - 架构升级：U-Net → DiT（含时间嵌入、无分类器条件）
 - 对比：accelerate / Megatron-Core 同配置的 loss 曲线 + MFU（沿用 L20 基准方法论）
 
-### Phase 4 — MoE + 前沿工具链（对齐 JD）
+### Phase 4 — MoE + 前沿工具链
 - Wan2.2 架构复刻（迷你版）：双专家（高/低噪声 SNR 切换）+ 视频 VAE 理解
 - 用 DeepSpeed（ZeRO-3 / Ulysses）跑通长序列训练，理解 SP
 - 读 Wan2.2 官方多卡推理/训练代码（FSDP + Ulysses）
@@ -195,7 +195,7 @@ PCIe 无 NVLink。做"正确性/方法论"验证，不做规模。
 - Phase 2：训练 loss 正常下降，采样生成肉眼可见有效图像；CPU 单测覆盖核心逻辑
 - Phase 3：分布式结果与单卡 loss 曲线一致（差值 < 1e-3），MFU 接近同配置基线
 - Phase 4：跑通 Wan2.2 推理（多卡），理解其 MoE/SP/FSDP 实现并能讲清楚
-- 面试输出：能完整讲清「从 LLM 到 diffusion 训练」差异 + 并行体系复用点
+- 总结输出：能完整讲清「从 LLM 到 diffusion 训练」差异 + 并行体系复用点
 
 ---
 
