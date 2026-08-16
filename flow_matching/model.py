@@ -15,10 +15,11 @@ import torch.nn.functional as F
 
 
 def sinusoidal_embedding(t: torch.Tensor, dim: int) -> torch.Tensor:
-    """时间 t -> 正弦嵌入（与 DDPM/DiT 一致）"""
+    """时间 t -> 正弦嵌入（与 DDPM/DiT 一致），保留输入 dtype（bf16 训练用）"""
     half = dim // 2
     freqs = torch.exp(-math.log(10000) * torch.arange(half, device=t.device) / half)
-    angles = t.float().unsqueeze(-1) * freqs.unsqueeze(0)      # [B, half]
+    freqs = freqs.to(t.dtype)                                # 与 t 同 dtype
+    angles = t.unsqueeze(-1) * freqs.unsqueeze(0)      # [B, half]
     return torch.cat([torch.sin(angles), torch.cos(angles)], dim=-1)
 
 
