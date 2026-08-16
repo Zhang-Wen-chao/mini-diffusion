@@ -150,7 +150,7 @@ U-Net (LDM/SD1.x) → DiT (纯 Transformer) → MMDiT (SD3, 双流合并)
 | Megatron-Core | TP/PP 生产实现 | Phase 3 对比基线（已有经验） |
 | diffusers | 预训练模型生态 | Phase 1 跑通参考管线 |
 | Wan2.2 官方 repo | FSDP + Ulysses 参考 | Phase 4 读代码 + 跑通推理 |
-| L20 4 卡 + NGC PyTorch 容器 容器 | 实验环境 | 全部实验 |
+| L20 4 卡 + NGC PyTorch 容器 | 实验环境 | 全部实验 |
 
 硬件约束（沿用 mini-megatron 结论）：L20 GDDR6 带宽 864 GB/s，单卡 MFU 天花板 ~14%，
 PCIe 无 NVLink。做"正确性/方法论"验证，不做规模。

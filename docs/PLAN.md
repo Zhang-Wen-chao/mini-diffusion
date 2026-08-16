@@ -67,5 +67,5 @@ M5  Phase 5 蒸馏 ✅ → 1 步 FID 857→304（DMD +12%）
 | 风险 | 缓解 |
 |---|---|
 | L20 显存/带宽受限（MFU ~14% 天花板） | 只用小模型/小数据做方法论验证 |
-| SD1.5 权重下载慢/失败 | HuggingFace + ModelScope 双通道（l20 clash 代理） |
+| SD1.5 权重下载慢/失败 | HuggingFace + ModelScope 双通道（代理） |
 | 视频训练成本过高 | Phase 4 只读代码 + 跑推理，不训练视频模型 |

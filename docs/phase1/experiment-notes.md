@@ -45,7 +45,7 @@ image ──Resize/CenterCrop/Normalize──> [3,256,256] ──VAE──> [4,3
    autocast 范围外反向会炸。解法：**VAE/TE 保持 fp32，UNet fp16 由 accelerate 托管**。
    这也是官方 SD 训练脚本的默认做法（除非显存不够才用 fp16 VAE + 特判）。
 4. **HF 下载走代理**：容器 `--net host`，代理在宿主机 mihomo `127.0.0.1:7892`
-   （不是 handoff 里写的 7890，clash 进程没起、mihomo 在跑）。
+   （代理端口以实际环境为准）。
    `export http_proxy=http://127.0.0.1:7892 https_proxy=...` 后下载正常。
 5. **数据集 image 字段可能没有 `.filename`**（内存 PIL 对象），直接 `.convert("RGB")`。
 
