@@ -1,7 +1,7 @@
 # 执行计划（PLAN）
 
 > 更新：2026-08-16。总目标：从 mini-megatron（LLM 并行）到 AIGC（Diffusion）训练，
-> 对标 Shopee AIGC 分布式训练优化工程师 JD。原则：**先理论后实现，实现用纯 PyTorch，
+> 原则：**先理论后实现，实现用纯 PyTorch，
 > 对比基线验证**。每个 Phase 有明确验收，复用 4×L20 基准方法论。
 
 ## 里程碑（全部达成 ✅）

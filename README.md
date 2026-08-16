@@ -2,7 +2,7 @@
 
 AIGC 分布式训练学习路线：从 mini-megatron（LLM 并行）到 Diffusion 训练。
 
-对标「Shopee AIGC 分布式训练优化工程师」岗位，覆盖：
+覆盖知识体系：
 **Diffusion 基础 → Flow Matching / Rectified Flow → 蒸馏（DMD/DMD2/MeanFlow）→ DiT/MoE → 分布式训练**。
 
 ## 文档
