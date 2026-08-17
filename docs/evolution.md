@@ -35,7 +35,7 @@ flowchart TD
 
     subgraph 架构演进
         UNET[U-Net 2021]
-        DIT[DiT 2023<br/>Transformer 取代 U-Net<br/>并行友好(与 GPT 同构)]
+        DIT[DiT 2023<br/>Transformer 取代 U-Net<br/>并行友好（与 GPT 同构）]
         MMDIT[MMDiT 2024<br/>SD3/Flux 双流文本+图像]
         MOE[MoE 2025<br/>Wan2.2 双专家<br/>高/低噪声按 SNR 切换<br/>27B 总参/14B 激活]
     end
