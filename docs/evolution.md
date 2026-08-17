@@ -26,7 +26,8 @@ flowchart TD
         RF[Rectified Flow 2022<br/>reflow 让轨迹直线化<br/>少步采样误差↓]
     end
 
-    subgraph 一步/少步 2023-2025
+    subgraph 一步/少步 2022-2025
+        PD[Progressive Distillation 2022<br/>2 步合 1 步 迭代减半<br/>1024→8 步, 稳定但多轮]
         CM[Consistency Models 2023<br/>学 任意t→x0 映射, 1 步生成]
         DMD[DMD 2023<br/>分布匹配蒸馏<br/>score 对齐 + 回归项]
         DMD2[DMD2 2024<br/>+真图对抗项, 质量↑稳定↑]
@@ -48,6 +49,8 @@ flowchart TD
     SDE --> FM
     DDIM --> FM
     FM --> RF
+    DDIM --> PD
+    PD --> CM
     RF --> CM
     CM --> DMD
     DMD --> DMD2
@@ -64,7 +67,7 @@ flowchart TD
 **读懂这张图的关键**：
 - **Flow 路线**：FM 提出"预测速度场"，RF 让轨迹更直——
   这是 SD3/Flux/Wan 全部选择的主路线（少步采样）。
-- **一步生成路线**：DMD 用分布匹配把多步 ODE 压缩成一步前向；
+- **一步生成路线**：最早的少步路线是 Progressive Distillation（把 2 步合成 1 步、迭代减半）；DMD 用分布匹配把多步 ODE 压缩成一步前向；
   MeanFlow（2025）从时间平均速度场出发统一 CM 与 FM。
 - **架构线**：U-Net → DiT（并行友好）→ MMDiT（多模态）→ MoE（容量-成本解耦）。
 
