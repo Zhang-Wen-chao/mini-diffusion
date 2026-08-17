@@ -62,7 +62,7 @@ image ──Resize/CenterCrop/Normalize──> [3,256,256] ──VAE──> [4,3
 ```bash
 cd /path/to/mini-diffusion-test
 export http_proxy=http://127.0.0.1:7892 https_proxy=http://127.0.0.1:7892
-python3 phase1/train_sd_tiny.py --dataset huggan/pokemon \
+python3 scripts/train_sd_finetune.py --dataset huggan/pokemon \
     --resolution 256 --train-batch-size 4 --max-train-steps 600 \
     --mixed-precision fp16 --save-every 300
 ```

@@ -88,8 +88,10 @@ loss 几乎持平（早期 moe 略慢 ~1-4%）。
 # MoE vs dense 对比（15k 步 × 2）
 python3 -u -m flow_matching.train_moe_compare --steps 15000
 
-# FID 对比（用保存的权重）
-python3 -u -m flow_matching.eval_moe_fid
+# FID 对比（用 train_moe_compare 保存的权重，--weights model）
+python3 -u -m flow_matching.eval_fid_weights \
+    --objective flow --ckpt runs/phase4/loss-dense.pt --weights model \
+    --steps-list 50 --ref-feats runs/real-feats.npy   # ref-feats 需先由 eval_fid.py 生成
 
 # DeepSpeed ZeRO-2/3（2 卡）
 NCCL_SHM_DISABLE=1 deepspeed --num_gpus=2 flow_matching/train_ds.py --zero 3 --steps 150

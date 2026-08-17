@@ -6,7 +6,7 @@
 可用 --model-id 换成 stable-diffusion-v1-5。
 
 用法（L20 容器，先 export 代理下载模型/数据）：
-  python3 phase1/train_sd_tiny.py \
+  python3 scripts/train_sd_finetune.py \
       --resolution 256 --train-batch-size 4 --max-train-steps 500 \
       --mixed-precision fp16 --save-every 250 --seed 0
 """
