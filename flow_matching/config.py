@@ -33,8 +33,8 @@ class DDPMConfig:
 @dataclass
 class TrainConfig:
     objective: str = "flow"       # ddpm | flow
-    data_dir: str = "/path/to/mini-diffusion-test/data"
-    out_dir: str = "/path/to/mini-diffusion-test/runs/phase2"
+    data_dir: str = "data"        # 相对仓库根（Mac/L20 通用，与 cwd 无关）
+    out_dir: str = "runs"         # 相对仓库根
     batch_size: int = 64
     lr: float = 2e-4
     weight_decay: float = 0.0

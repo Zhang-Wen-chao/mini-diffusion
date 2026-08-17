@@ -17,7 +17,7 @@ import time
 
 import torch
 
-sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 # deepspeed 0.19.5 与 nvtx>=0.2.8 的 DummyDomain API 不兼容（push_range 签名变化）
 # 直接 patch 掉 profiling 调用（deepspeed 不支持 -m，本文件即入口）

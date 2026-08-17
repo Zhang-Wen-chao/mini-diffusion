@@ -86,7 +86,7 @@ def main():
     ap.add_argument("--mixed-precision", default="fp16")
     ap.add_argument("--gradient-checkpointing", action="store_true", default=True)
     ap.add_argument("--save-every", type=int, default=250)
-    ap.add_argument("--output-dir", default="/path/to/mini-diffusion-test/runs/sd-tiny")
+    ap.add_argument("--output-dir", default="runs/sd-tiny")
     ap.add_argument("--seed", type=int, default=0)
     args = ap.parse_args()
 
