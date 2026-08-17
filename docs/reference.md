@@ -1,6 +1,6 @@
 # 参考手册：论文清单 + 关键对比
 
-> 技术演进图见 [evolution.md](evolution.md)，实现记录见各 Phase 的 experiment-notes。
+> 技术演进图见 [evolution.md](evolution.md)；**逐篇论文摘要与发展主线见 [theory/00-survey.md](theory/00-survey.md)**；实现记录见各 Phase 的 experiment-notes。
 > 本文保留知识型参考内容（论文清单 / LLM vs Diffusion 对比 / 技术栈）。
 
 ## 1. 论文清单

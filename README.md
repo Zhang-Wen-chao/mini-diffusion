@@ -32,6 +32,7 @@ NCCL_SHM_DISABLE=1 CUDA_DEVICE_MAX_CONNECTIONS=1 \
 
 - [docs/evolution.md](docs/evolution.md) — **技术演进路线图**（领域方法演进 + 项目 Phase 落地）
 - [docs/reference.md](docs/reference.md) — 参考手册（论文清单 / LLM vs Diffusion 对比 / 技术栈）
+- [docs/theory/00-survey.md](docs/theory/00-survey.md) — **领域发展综述**（VAE/GAN → DDPM → Flow → 一步蒸馏 → DiT/MoE，逐篇论文摘要）
 - `docs/theory/` — Phase 0 理论笔记（DDPM ELBO 推导 → Flow Matching CFM 恒等式 → 蒸馏）
 - `docs/phase{1..5}/` — 各 Phase 实验记录（含全部可复现数据与踩坑）
 
