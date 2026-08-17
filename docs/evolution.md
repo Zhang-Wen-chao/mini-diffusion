@@ -59,21 +59,12 @@ flowchart TD
     MMDIT --> MOE
     FM --> MMDIT
     RF --> MOE
-
-    style DDPM fill:#e8f5e9
-    style FM fill:#e3f2fd
-    style RF fill:#e3f2fd
-    style DMD fill:#fff3e0
-    style DMD2 fill:#fff3e0
-    style MF fill:#f3e5f5
-    style DIT fill:#e3f2fd
-    style MOE fill:#f3e5f5
 ```
 
 **读懂这张图的关键**：
-- **蓝色系 = Flow 路线**：FM 提出"预测速度场"，RF 让轨迹更直——
+- **Flow 路线**：FM 提出"预测速度场"，RF 让轨迹更直——
   这是 SD3/Flux/Wan 全部选择的主路线（少步采样）。
-- **橙/紫色系 = 一步生成**：DMD 用分布匹配把多步 ODE 压缩成一步前向；
+- **一步生成路线**：DMD 用分布匹配把多步 ODE 压缩成一步前向；
   MeanFlow（2025）从时间平均速度场出发统一 CM 与 FM。
 - **架构线**：U-Net → DiT（并行友好）→ MMDiT（多模态）→ MoE（容量-成本解耦）。
 
@@ -82,19 +73,13 @@ flowchart TD
 ## 2. 项目演进（本仓库 Phase 0-5 的落地）
 
 ```mermaid
-flowchart LR
+flowchart TB
     P0[Phase 0 理论<br/>DDPM/FM/RF 手推公式<br/>4 篇笔记] --> P1
     P1[Phase 1 diffusers 跑通<br/>VAE→TE→UNet→scheduler<br/>tiny-sd + pokemon] --> P2
     P2[Phase 2 手写 mini flow<br/>33M UNet + DDPM/FM 双目标<br/>60k 步 × 2 模型] --> P3
     P3[Phase 3 DiT + 分布式<br/>TP/DP 等价性<br/>前向 0 误差, loss 差<1e-4] --> P4
     P4[Phase 4 MoE + DeepSpeed<br/>Wan2.2 读码 + 双专家实现<br/>ZeRO-2/3 跑通] --> P5
     P5[Phase 5 蒸馏一步生成<br/>1 步 FID 857→304<br/>DMD 分布匹配 +12%]
-
-    style P0 fill:#e8f5e9
-    style P2 fill:#e3f2fd
-    style P3 fill:#e3f2fd
-    style P4 fill:#f3e5f5
-    style P5 fill:#fff3e0
 ```
 
 ### 关键量化结果（每条都对应一个可复现实验）
