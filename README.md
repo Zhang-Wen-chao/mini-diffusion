@@ -7,7 +7,7 @@ AIGC 分布式训练学习路线：从 mini-megatron（LLM 并行）到 Diffusio
 
 ## 文档
 
-- [REQUIREMENTS.md](REQUIREMENTS.md) — 需求 + AIGC 技术路线（入口，先读这个）
+- [docs/reference.md](docs/reference.md) — 参考手册（论文清单 / LLM vs Diffusion 对比 / 技术栈）
 - [docs/evolution.md](docs/evolution.md) — **技术演进路线图**（领域方法演进 + 项目 Phase 落地）
 - `docs/` — 论文笔记与理论推导
 

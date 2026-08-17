@@ -92,6 +92,6 @@ python3 -u -m flow_matching.train_moe_compare --steps 15000
 python3 -u -m flow_matching.eval_moe_fid
 
 # DeepSpeed ZeRO-2/3（2 卡）
-NCCL_SHM_DISABLE=1 deepspeed --num_gpus=2 train_ds_entry.py --zero 3 --steps 150
-NCCL_SHM_DISABLE=1 deepspeed --num_gpus=2 train_ds_entry.py --zero 2 --steps 150
+NCCL_SHM_DISABLE=1 deepspeed --num_gpus=2 flow_matching/train_ds.py --zero 3 --steps 150
+NCCL_SHM_DISABLE=1 deepspeed --num_gpus=2 flow_matching/train_ds.py --zero 2 --steps 150
 ```

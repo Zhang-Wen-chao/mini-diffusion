@@ -19,6 +19,24 @@ import torch
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
 
+# deepspeed 0.19.5 与 nvtx>=0.2.8 的 DummyDomain API 不兼容（push_range 签名变化）
+# 直接 patch 掉 profiling 调用（deepspeed 不支持 -m，本文件即入口）
+try:
+    import nvtx
+    import nvtx._lib.lib as _nvtx_lib
+
+    _orig = _nvtx_lib.DummyDomain.push_range
+
+    def _patched(self, *args, **kwargs):
+        try:
+            return _orig(self, *args, **kwargs)
+        except TypeError:
+            return None
+
+    _nvtx_lib.DummyDomain.push_range = _patched
+except (ImportError, AttributeError):
+    pass
+
 from flow_matching.config import TrainConfig  # noqa: E402
 from flow_matching.data import get_cifar10_loader  # noqa: E402
 from flow_matching.dit import DiT  # noqa: E402
