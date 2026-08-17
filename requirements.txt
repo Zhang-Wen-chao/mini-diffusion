@@ -1,0 +1,18 @@
+# mini-diffusion 运行依赖（按用途分组，全部可选）
+# 核心教学实现（flow_matching/）仅需 torch + torchvision
+torch>=2.4
+torchvision
+
+# 数据（CIFAR-10 经 HF datasets 加载）
+datasets
+
+# Phase 1 学习脚本（scripts/train_sd_finetune.py，diffusers 生态）
+diffusers>=0.35
+transformers
+accelerate
+
+# Phase 4 工具链对比（flow_matching/train_ds.py）
+deepspeed
+
+# 开发
+pytest
